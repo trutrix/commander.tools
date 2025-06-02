@@ -10,5 +10,8 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@nuxt/ui'
   ],
-  css: ['~/assets/css/main.css']
+  css: ['~/assets/css/main.css'],
+  icon: {
+    size: '30px'
+  }
 })

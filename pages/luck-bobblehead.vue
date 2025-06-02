@@ -156,17 +156,30 @@ export function roll_luck_chances(dice_count: number, activations: number): obje
 
 <template>
   <div class="flex flex-col items-center justify-center h-screen">
-    <div class="text-2xl font-bold mb-20">Luck Bobblehead</div>
-    <div class="mb-4">
-      Luck Activations
-    </div>
-    <UInputNumber v-model="luck_activations" class="mb-10" v-on:update:model-value="calc_win_chance()" />
-    <div class="mb-4">
-      Total Bobbleheads
-    </div>
-    <UInputNumber v-model="total_bobbleheads" v-on:update:model-value="calc_win_chance()" />
-    <div class="mt-10">
-      <div class="text-lg font-bold">Win Chance: {{ win_chance }}%</div>
+    <div class="text-2xl font-bold mt-15">Luck Bobblehead</div>
+      <div class="flex flex-col items-center justify-center flex-grow">
+      <div class="mb-4">
+        Luck Activations
       </div>
+      <UInputNumber v-model="luck_activations" class="mb-10" v-on:update:model-value="calc_win_chance()"  :autofocus="false" />
+      <div class="mb-5">
+        Total Bobbleheads
+      </div>
+      <UInputNumber v-model="total_bobbleheads" v-on:update:model-value="calc_win_chance()" />
+      <div class="mt-10">
+        <div class="text-lg font-bold">Win Chance: {{ win_chance }}%</div>
+      </div>
+      <UButton class="mt-5" color="primary" label="Roll Dice" @click="console.log(roll_luck_chances(total_bobbleheads, luck_activations))" />
+      <div class="mt-5">Results in console for now</div>
+      <div class="mt-5">
+        <ShiftingD6 />
+        <ShiftingD6 />
+        <ShiftingD6 />
+        <ShiftingD6 />
+        <ShiftingD6 />
+        <ShiftingD6 />
+        <ShiftingD6 />
+      </div>
+    </div>
   </div>
 </template>
