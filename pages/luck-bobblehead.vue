@@ -41,12 +41,12 @@ export function flip_coin() : number {
 
 
 // Calculate chances of rolling six exactly seven times with x amount of dice
-export function get_luck_chance(dice_count: number, dice_sides: number): number  {
+export function get_luck_chance(dice_count: number): number  {
     let win_target = 7;
-    let dice_chance = 1 / dice_sides;
+    let dice_chance = 1 / 6;
 
     if (dice_count < win_target) {
-        return 0; // Not enough dice to roll sixes
+        return 0; // Not enough dice to roll sixe sixes
     }
 
     return choosei(dice_count, win_target) * dice_chance ** win_target * (1 - dice_chance) ** (dice_count - win_target);
@@ -138,7 +138,18 @@ export function roll_luck_chances(dice_count: number, activations: number): obje
 <script setup lang="ts">
     const luck_activations = ref(1);
     const total_bobbleheads = ref(1);
-    const luck_chances = ref(0);
+    const win_chance = ref(0);
+
+    function calc_win_chance(): number {
+        let result = (calc_luck_chances(get_luck_chance(total_bobbleheads.value, 6), luck_activations.value) * 100).toFixed(4);
+        if (result == 0) {
+            win_chance.value = 0;
+        } else {
+            win_chance.value = result;
+        }
+    }
+
+
 </script>
 
 
@@ -149,14 +160,13 @@ export function roll_luck_chances(dice_count: number, activations: number): obje
     <div class="mb-4">
       Luck Activations
     </div>
-    <UInputNumber v-model="luck_activations" class="mb-10" />
+    <UInputNumber v-model="luck_activations" class="mb-10" v-on:update:model-value="calc_win_chance()" />
     <div class="mb-4">
       Total Bobbleheads
     </div>
-    <UInputNumber v-model="total_bobbleheads" />
-    <UButton class="mt-10" color="primary" label="Calculate Chances" @click="luck_chances = calc_luck_chances(get_luck_chance(total_bobbleheads, 6), luck_activations) * 100" />
+    <UInputNumber v-model="total_bobbleheads" v-on:update:model-value="calc_win_chance()" />
     <div class="mt-10">
-      <div class="text-lg font-bold">Win Chance: {{ luck_chances }}%</div>
+      <div class="text-lg font-bold">Win Chance: {{ win_chance }}%</div>
       </div>
   </div>
 </template>
