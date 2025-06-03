@@ -2,6 +2,9 @@
 
 let count = ref(Math.floor(Math.random() * 6) + 1); // Random initial value between 1 and 6
 
+let t: number | void;
+
+
 function shift() {
     if (count.value >= 6) {
         count.value = 1;
@@ -26,14 +29,9 @@ function update_visible_dice() {
     }
 }
 
-let timer = setInterval(() => {
-    shift();
-}, 100);
-
-
 </script>
 
-
 <template>
-    <Icon style="color: white" v-bind:name="update_visible_dice()" />
+    
+    <Icon style="color: white" v-bind:name="update_visible_dice()" v-on:vue:mounted="t = setInterval(() => shift(), 500)" />
 </template>

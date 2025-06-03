@@ -67,13 +67,25 @@ function choosei(n: number, k: number) : number {
   return result;
 }
 
+export type DiceResults = {
+    evens: number,
+    odds: number,
+    ones: number,
+    twos: number,
+    threes: number,
+    fours: number,
+    fives: number,
+    sixes: number,
+    wins: number
+}
+
 
 export function calc_luck_chances(chance: number, activations: number): number {
     return (1 - (1 - chance) ** activations);
 }
 
 
-export function roll_luck_chances(dice_count: number, activations: number): object {
+export function roll_luck_chances(dice_count: number, activations: number): DiceResults {
     let evens = 0;
     let odds = 0;
     let ones = 0;
@@ -136,17 +148,36 @@ export function roll_luck_chances(dice_count: number, activations: number): obje
 
 </script>
 <script setup lang="ts">
+import D6Pile from '~/components/D6Pile.vue';
+
     const luck_activations = ref(1);
     const total_bobbleheads = ref(1);
     const win_chance = ref(0);
 
-    function calc_win_chance(): number {
-        let result = (calc_luck_chances(get_luck_chance(total_bobbleheads.value, 6), luck_activations.value) * 100).toFixed(4);
+    function calc_win_chance() {
+        let result = (calc_luck_chances(get_luck_chance(total_bobbleheads.value, 6), luck_activations.value) * 100);
         if (result == 0) {
             win_chance.value = 0;
         } else {
-            win_chance.value = result;
+            win_chance.value = result.toFixed(4);
         }
+    }
+
+    let dice_results: Ref<DiceResults> = ref({
+        ones: 0,
+        twos: 0,
+        threes: 0,
+        fours: 0,
+        fives: 0,
+        sixes: 0,
+        evens: 0,
+        odds: 0,
+        wins: 0
+    });
+
+    function roll_to_result() {
+        dice_results.value = roll_luck_chances(total_bobbleheads.value, luck_activations.value);
+        console.log(dice_results);
     }
 
 
@@ -169,16 +200,9 @@ export function roll_luck_chances(dice_count: number, activations: number): obje
       <div class="mt-10">
         <div class="text-lg font-bold">Win Chance: {{ win_chance }}%</div>
       </div>
-      <UButton class="mt-5" color="primary" label="Roll Dice" @click="console.log(roll_luck_chances(total_bobbleheads, luck_activations))" />
-      <div class="mt-5">Results in console for now</div>
+      <UButton class="mt-5" color="primary" label="Roll Dice" @click="roll_to_result()" />
       <div class="mt-5">
-        <ShiftingD6 />
-        <ShiftingD6 />
-        <ShiftingD6 />
-        <ShiftingD6 />
-        <ShiftingD6 />
-        <ShiftingD6 />
-        <ShiftingD6 />
+        <D6Pile v-bind="dice_results"/>
       </div>
     </div>
   </div>

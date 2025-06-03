@@ -12,6 +12,8 @@ export default defineNuxtConfig({
   ],
   css: ['~/assets/css/main.css'],
   icon: {
-    size: '30px'
+    size: '30px',
+    mode: 'css',
+    cssLayer: 'base'
   }
 })
