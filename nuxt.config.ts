@@ -14,6 +14,10 @@ export default defineNuxtConfig({
   icon: {
     size: '30px',
     mode: 'css',
-    cssLayer: 'base'
+    cssLayer: 'base',
+    clientBundle: {
+      scan: true,
+      sizeLimitKb: 256
+    }
   }
 })
