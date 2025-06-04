@@ -187,7 +187,7 @@ import D6Pile from '~/components/D6Pile.vue';
 
 <template>
   <div class="flex flex-col items-center justify-center h-screen">
-    <div class="text-2xl font-bold mt-15">Luck Bobblehead</div>
+    <div class="text-2xl font-bold mt-5">Luck Bobblehead</div>
       <div class="flex flex-col items-center justify-center flex-grow">
       <div class="mb-4">
         Luck Activations
