@@ -152,12 +152,12 @@ import D6Pile from '~/components/D6Pile.vue';
 
     const luck_activations = ref(1);
     const total_bobbleheads = ref(1);
-    const win_chance = ref(0);
+    const win_chance: Ref<String, String> = ref('0');
 
     function calc_win_chance() {
-        let result = (calc_luck_chances(get_luck_chance(total_bobbleheads.value, 6), luck_activations.value) * 100);
+        let result = (calc_luck_chances(get_luck_chance(total_bobbleheads.value), luck_activations.value) * 100);
         if (result == 0) {
-            win_chance.value = 0;
+            win_chance.value = '0';
         } else {
             win_chance.value = result.toFixed(4);
         }
@@ -186,7 +186,8 @@ import D6Pile from '~/components/D6Pile.vue';
 
 
 <template>
-  <div class="flex flex-col items-center justify-center h-screen">
+  <Navbar />
+  <div class="flex flex-col items-center justify-center h-screen pt-10">
     <div class="text-2xl font-bold mt-5">Luck Bobblehead</div>
       <div class="flex flex-col items-center justify-center flex-grow">
       <div class="mb-4">

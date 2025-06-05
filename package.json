@@ -21,6 +21,8 @@
   },
   "devDependencies": {
     "@iconify-json/bx": "^1.2.2",
+    "@iconify-json/codicon": "^1.2.19",
+    "@iconify-json/dinkie-icons": "^1.2.0",
     "@iconify-json/lucide": "^1.2.45"
   }
 }

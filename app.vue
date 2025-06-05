@@ -4,7 +4,5 @@ import type { NavigationMenuItem } from '@nuxt/ui';
 </script>
 
 <template>
-  <div>
-    <NuxtPage></NuxtPage>
-  </div>
+  <NuxtPage></NuxtPage>
 </template>
