@@ -1,12 +1,8 @@
 <template>
+  <Navbar />
   <div class="flex flex-col items-center justify-center h-screen">
-    <Navbar />
-    <h1 class="text-3xl font-bold mb-4">Commander Tools</h1>
-    <NuxtLink to="/luck-bobblehead" class="mb-4" >
-      <UButton class="w-80 md:w-50 h-12" color="primary" label="Luck Bobblehead" />
-    </NuxtLink>
-    <NuxtLink to="/coin-flipper">
-      <UButton class="w-80 md:w-50 h-12" color="secondary" label="Coin Flipper"/>
-    </NuxtLink>
+    <h1 class="text-3xl mb-10">Commander Tools</h1>
+      <UButton class="mb-4 w-3/4 md:w-3/4 lg:w-1/2 xl:w-1/3" color="neutral" variant="subtle" label="Luck Bobblehead" size="xl" to="/luck-bobblehead"/>
+      <UButton class="mb-4 w-3/4 md:w-3/4 lg:w-1/2 xl:w-1/3" color="neutral" variant="subtle" label="Okaun, Eye of Chaos // Zndrsplt, Eye of Wisdom" size="xl" to="/coin-flipper"/>
   </div>
 </template>
